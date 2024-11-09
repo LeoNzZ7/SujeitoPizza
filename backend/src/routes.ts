@@ -1,9 +1,8 @@
 import { Router, Request, Response } from "express";
+import { CreateUserController } from "./controllers/user/CreateUserController";
 
 const router = Router();
 
-router.get("/test", (req: Request, res: Response) => {
-    res.status(200).json({ message: "Server online" })
-})
+router.post("/users", new CreateUserController().handle)
 
 export { router } 
