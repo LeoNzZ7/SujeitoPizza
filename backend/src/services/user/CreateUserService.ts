@@ -9,7 +9,7 @@ interface UserRequest {
 class CreateUserService{
     async execute({ name, email, password }: UserRequest) {
         if(!email) {
-            throw new Error("É obrigatório o usuário enviar um endereço de email")
+            throw new Error("É obrigatório o usuário enviar um endereço de email!")
         }
 
         const userAlreadyExists = await prismaClient.user.findFirst({

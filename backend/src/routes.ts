@@ -3,6 +3,10 @@ import { CreateUserController } from "./controllers/user/CreateUserController";
 
 const router = Router();
 
-router.post("/users", new CreateUserController().handle)
+const createUserController = new CreateUserController();
+
+router.post("/users", async (req: Request, res: Response) => {
+  await createUserController.handle(req, res);
+});
 
 export { router } 
