@@ -38,7 +38,7 @@ class AuthUserService {
                 name: user.name,
                 email: user.email
             },
-            process.env.JTW_SECRET_KEY as string,
+            process.env.JWT_SECRET_KEY as string,
             {
                 subject: user.id,
                 expiresIn: "30d"
