@@ -6,7 +6,7 @@ interface Payload {
 }
 
 export async function isAuthenticated(req: Request, res: Response, next: NextFunction){
-    const authToken = req.headers.authorization
+    const authToken = await req.headers.authorization
 
     if(!authToken) {
         res.status(401).end();
@@ -21,8 +21,10 @@ export async function isAuthenticated(req: Request, res: Response, next: NextFun
             res.status(401).end();
         }
 
-        next()
+        req.user_id = sub
+
+        return next()
     } catch (error) {
-        res.status(401).end();
+        res.status(401).end(); 
     }
 }
