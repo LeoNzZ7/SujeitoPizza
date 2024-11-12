@@ -1,13 +1,21 @@
 import { Router, Request, Response } from "express";
+import multer from "multer";
+
 import { CreateUserController } from "./controllers/user/CreateUserController";
 import { AuthUserController } from "./controllers/user/AuthUserController";
 import { DetailUserController } from "./controllers/user/DetailUserController";
+
 import { isAuthenticated } from "./middlewares/isAuthenticated";
+
 import { CreateCategoryController } from "./controllers/category/CreateCategoryController";
 import { ListCategoryController } from "./controllers/category/ListCategoryController";
 import { CreateProductController } from "./controllers/product/CreateProductController";
 
+import uploadConfig from "./config/multer"
+
 const router = Router();
+
+const upload = multer(uploadConfig.upload("./tmp"))
 
 //Instâncias das controllers relacionadas à criação, autenticação e detalhes de usuário.
 const createUserController = new CreateUserController();
@@ -44,7 +52,7 @@ router.get("/category", isAuthenticated, async (req: Request, res: Response) => 
 })
 
 //Rotas relacionadas a criação e detalhes das categorias.
-router.post("/product", isAuthenticated, async (req: Request, res: Response) => {
+router.post("/product", isAuthenticated, upload.single("file"), async (req: Request, res: Response) => {
   await createProductController.handle(req, res);
 }) 
 

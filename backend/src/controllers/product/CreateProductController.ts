@@ -3,13 +3,16 @@ import { CreateProductService } from "../../services/product/CreateProductServic
 
 class CreateProductController {
     async handle(req: Request, res: Response){
-        const { name, description, price, category_id } = req.body
-
-        let banner = ""
-
+        const { name, description, price, category_id, banner } = req.body
+    
         const createProductService = new CreateProductService()
 
-        const product = await createProductService.execute({
+        if(!req.file) {
+            throw new Error("É necessário o envio de uma foto para cadastrar o produto!")
+        } else {
+            const { originalname, filename: banner } = req.file
+
+            const product = await createProductService.execute({
             name,
             description,
             price,
@@ -17,7 +20,8 @@ class CreateProductController {
             banner
         })
 
-        res.json(product);
+        res.status(201).json(product)
+        }
     }
 }
 
