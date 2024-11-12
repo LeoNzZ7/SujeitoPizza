@@ -12,6 +12,7 @@ import { ListCategoryController } from "./controllers/category/ListCategoryContr
 import { CreateProductController } from "./controllers/product/CreateProductController";
 
 import uploadConfig from "./config/multer"
+import { ListByCategoryController } from "./controllers/product/ListByCategoryController";
 
 const router = Router();
 
@@ -28,6 +29,7 @@ const listCategoryController = new ListCategoryController()
  
 //Instâncias de controllers relacionadas a criação e detalhes dos produtos.
 const createProductController = new CreateProductController()
+const listByCategoryController = new ListByCategoryController()
 
 //Rotas relacionadas à criação, autenticação e detalhes do usuário.
 router.post("/users", async (req: Request, res: Response) => {
@@ -42,7 +44,7 @@ router.get("/me", isAuthenticated, async (req, res) => {
   await detailUserController.handle(req, res);
 })
 
-//Rotas relacionadas à criação e detalhes das categorias dos produtos.
+//Rotas relacionadas a criação e detalhes das categorias.
 router.post("/category",isAuthenticated  ,async (req: Request, res: Response) => {
   await createCategoryController.handle(req, res);
 })
@@ -51,9 +53,13 @@ router.get("/category", isAuthenticated, async (req: Request, res: Response) => 
   await listCategoryController.handle(req, res);
 })
 
-//Rotas relacionadas a criação e detalhes das categorias.
+//Rotas relacionadas à criação e detalhes dos produtos.
 router.post("/product", isAuthenticated, upload.single("file"), async (req: Request, res: Response) => {
   await createProductController.handle(req, res);
+})
+
+router.get("/category/product", isAuthenticated, async (req: Request, res: Response) => {
+  await listByCategoryController.handle(req, res);
 }) 
 
 export { router } 
