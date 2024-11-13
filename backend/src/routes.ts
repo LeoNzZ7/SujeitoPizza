@@ -13,6 +13,7 @@ import { CreateProductController } from "./controllers/product/CreateProductCont
 
 import uploadConfig from "./config/multer"
 import { ListByCategoryController } from "./controllers/product/ListByCategoryController";
+import { CreateOrderController } from "./controllers/order/CreateOrderController";
 
 const router = Router();
 
@@ -30,6 +31,9 @@ const listCategoryController = new ListCategoryController()
 //Instâncias de controllers relacionadas a criação e detalhes dos produtos.
 const createProductController = new CreateProductController()
 const listByCategoryController = new ListByCategoryController()
+
+//Instâncias de controllers relacionadas a criação e detalhes dos pedidos.
+const createOrderController = new CreateOrderController()
 
 //Rotas relacionadas à criação, autenticação e detalhes do usuário.
 router.post("/users", async (req: Request, res: Response) => {
@@ -61,5 +65,10 @@ router.post("/product", isAuthenticated, upload.single("file"), async (req: Requ
 router.get("/category/product", isAuthenticated, async (req: Request, res: Response) => {
   await listByCategoryController.handle(req, res);
 }) 
+
+//Rotas relacionadas à criação e detalhes dos pedidos.
+router.get("/order", isAuthenticated, async (req: Request, res: Response) => {
+  await createOrderController.handle(req, res)
+})
 
 export { router } 
