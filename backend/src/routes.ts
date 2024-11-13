@@ -14,6 +14,7 @@ import { CreateProductController } from "./controllers/product/CreateProductCont
 import uploadConfig from "./config/multer"
 import { ListByCategoryController } from "./controllers/product/ListByCategoryController";
 import { CreateOrderController } from "./controllers/order/CreateOrderController";
+import { RemoveOrderController } from "./controllers/order/RemoveOrderController";
 
 const router = Router();
 
@@ -34,6 +35,7 @@ const listByCategoryController = new ListByCategoryController()
 
 //Instâncias de controllers relacionadas a criação e detalhes dos pedidos.
 const createOrderController = new CreateOrderController()
+const removeOrderController = new RemoveOrderController()
 
 //Rotas relacionadas à criação, autenticação e detalhes do usuário.
 router.post("/users", async (req: Request, res: Response) => {
@@ -67,8 +69,12 @@ router.get("/category/product", isAuthenticated, async (req: Request, res: Respo
 }) 
 
 //Rotas relacionadas à criação e detalhes dos pedidos.
-router.get("/order", isAuthenticated, async (req: Request, res: Response) => {
+router.post("/order", isAuthenticated, async (req: Request, res: Response) => {
   await createOrderController.handle(req, res)
+})
+
+router.delete("/order", isAuthenticated, async (req: Request, res: Response) => {
+  await removeOrderController.handle(req, res)
 })
 
 export { router } 
