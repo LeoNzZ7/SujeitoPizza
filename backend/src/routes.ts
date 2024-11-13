@@ -16,6 +16,7 @@ import { SendOrderController } from "./controllers/order/SendOrderController";
 
 import uploadConfig from "./config/multer"
 import { isAuthenticated } from "./middlewares/isAuthenticated";
+import { ListOrdersController } from "./controllers/order/ListOrdersController";
 
 const router = Router();
 
@@ -40,6 +41,7 @@ const removeOrderController = new RemoveOrderController()
 const addItemController = new AddItemController()
 const removeItemController = new RemoveItemController()
 const sendOrderController = new SendOrderController()
+const listOrdersController = new ListOrdersController()
 
 //Rotas relacionadas à criação, autenticação e detalhes do usuário.
 router.post("/users", async (req: Request, res: Response) => {
@@ -91,6 +93,10 @@ router.delete("/order/delete", isAuthenticated, async (req: Request, res: Respon
 
 router.put("/order/send", isAuthenticated, async (req: Request, res: Response) =>{
   await sendOrderController.handle(req, res)
+})
+
+router.get("/orders", isAuthenticated, async (req: Request, res: Response) =>{
+  await listOrdersController.handle(req, res)
 })
 
 export { router } 
