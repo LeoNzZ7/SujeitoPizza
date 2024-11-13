@@ -9,7 +9,7 @@ class RemoveOrderController {
 
         const order = await removeOrderService.execute({ order_id })
 
-        res.json(order)
+        res.status(204).json(order)
     }
 }
 

@@ -9,7 +9,7 @@ class RemoveItemController {
 
         const item = await removeItemService.execute({ item_id })
 
-        res.json(item)
+        res.status(204).json(item)
     }
 }
 

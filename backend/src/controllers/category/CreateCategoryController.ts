@@ -9,7 +9,7 @@ class CreateCategoryController {
 
         const category = await createCategoryService.execute({name})
 
-        res.json(category)
+        res.status(201).json(category)
     }
 }
 

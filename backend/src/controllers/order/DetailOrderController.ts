@@ -9,7 +9,7 @@ class DetailOrderController {
 
         const order = await detailOrderService.execute({ order_id })
 
-        res.json(order)
+        res.status(200).json(order)
     }
 }
 

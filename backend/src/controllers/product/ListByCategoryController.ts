@@ -9,7 +9,7 @@ class ListByCategoryController {
 
         const products = await listByCategoryService.execute({category_id})
 
-        res.json(products)
+        res.status(200).json(products)
     }
 }
 

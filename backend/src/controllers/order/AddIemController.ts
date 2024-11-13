@@ -9,7 +9,7 @@ class AddItemController {
 
         const item = await addItemService.execute({ order_id, product_id, amount })
 
-        res.json(item)
+        res.status(201).json(item)
     }
 }
 

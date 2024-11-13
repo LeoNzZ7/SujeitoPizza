@@ -9,7 +9,7 @@ class FinishOrderController {
     
         const order = await finishOrderService.execute({ order_id })
 
-        res.json(order)
+        res.status(200).json(order)
     }
 }
 

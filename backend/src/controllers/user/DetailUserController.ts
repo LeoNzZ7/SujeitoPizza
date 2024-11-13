@@ -9,7 +9,7 @@ class DetailUserController {
 
        const user = await detailUserService.execute(user_id)
 
-       res.json(user)
+       res.status(200).json(user)
     }
 }
 

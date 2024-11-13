@@ -7,7 +7,7 @@ class ListOrdersController {
 
         const order = await listOrdersService.execute()
 
-        res.json(order)
+        res.status(200).json(order)
     }
 }
 

@@ -7,7 +7,7 @@ class ListCategoryController {
 
         const category = await listCategoryService.execute()
 
-        res.json(category)
+        res.status(200).json(category)
     }
 }
 

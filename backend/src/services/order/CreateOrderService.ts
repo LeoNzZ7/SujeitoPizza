@@ -16,7 +16,7 @@ class CreateOrderService {
             data: {
                 table,
                 name,
-                total: 20
+                total: 0
             }
         })
 
