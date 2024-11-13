@@ -18,6 +18,7 @@ import uploadConfig from "./config/multer"
 import { isAuthenticated } from "./middlewares/isAuthenticated";
 import { ListOrdersController } from "./controllers/order/ListOrdersController";
 import { DetailOrderController } from "./controllers/order/DetailOrderController";
+import { FinishOrderController } from "./controllers/order/FinishOrderController";
 
 const router = Router();
 
@@ -44,6 +45,7 @@ const removeItemController = new RemoveItemController()
 const sendOrderController = new SendOrderController()
 const listOrdersController = new ListOrdersController()
 const detailOrderController = new DetailOrderController()
+const finishOrderController = new FinishOrderController()
 
 //Rotas relacionadas à criação, autenticação e detalhes do usuário.
 router.post("/users", async (req: Request, res: Response) => {
@@ -103,6 +105,10 @@ router.get("/orders", isAuthenticated, async (req: Request, res: Response) =>{
 
 router.get("/order/details", isAuthenticated, async (req: Request, res: Response) =>{
   await detailOrderController.handle(req, res)
+})
+
+router.put("/order/finish", isAuthenticated, async (req: Request, res: Response) =>{
+  await finishOrderController.handle(req, res)
 })
 
 export { router } 

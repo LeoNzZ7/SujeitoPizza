@@ -23,11 +23,9 @@ class AddItemService {
             select: {
                 price: true
             }
-        })
-
-        if(!product) {
+        }).catch(() => {
             throw new Error("Produto não encontrado!")
-        }
+        })
 
         const subtotal = amount * product.price
 
