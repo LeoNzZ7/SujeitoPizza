@@ -33,7 +33,7 @@ class CreateProductService {
         const product = await prismaClient.product.create({
             data: {
                 name,
-                price,
+                price: parseFloat(price),
                 description,
                 banner,
                 category_id
