@@ -21,7 +21,8 @@ export default {
             100: "#3FFFA3"
           },
           red: {
-            100: "#FF3F4B"
+            100: "#FF3F4B",
+            200: "#EE2E3A"
           }
         }
       }
